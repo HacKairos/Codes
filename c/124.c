@@ -1,40 +1,47 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
-int main(int argc, char const *argv[])
+typedef struct celula {
+   int dado;
+   struct celula *prox;
+} celula;
+
+
+void insere (celula *le, int x,celula *tatu) {
+
+tatu->dado=x;
+tatu->prox=le->prox;
+le->prox=tatu;
+}
+
+void divide_lista (celula *l, celula *l1, celula *l2){
+int impar[1000],i=0;
+int par[1000],x=0;
+for (l ; l != NULL; l=l->prox)
 {
-    int n, m, i, j;
-    scanf("%d %d", &n, &m);
-    int *N = malloc(n * sizeof(int)), *M = malloc(m * sizeof(int));
-    for (i = 0; i < n; i++)
-    {
-        scanf("%d", &N[i]);
+    if(l->dado%2!=0){
+        impar[i]=l->dado;
+        i++;
     }
-    for (i = 0; i < m; i++)
-    {
-        scanf("%d", &M[i]);
+     if(l->dado%2==0){
+        par[x]=l->dado;
+        x++;
     }
+}
+i--;
+x--;
 
-    for (j = 0; j < m; j++)
-    {
-        for (i = 0; i < n; i++)
-        {
-            if (M[j] > N[n - 1])
-            {
-                printf("%d\n", n);
-                break;
-            }
-            if (M[j] < N[0])
-            {
-                printf("0\n");
-                break;
-            }
-            if (N[i] < M[j] && M[j] <= N[i + 1])
-            {
-                printf("%d\n", i + 1);
-                break;
-            }          
-        }
-    }
-    return 0;
+for (i ; i >-1;i --){
+   if(i==0) 
+      {
+         l1->dado=impar[i];
+      }  else insere(l1,impar[i],l);
+}
+for (x ; x >-1;x --){
+    printf("%d\n",par[x]);
+   if(x==0) 
+      {
+         l2->dado=par[x];
+      }  else insere(l2,par[x],l);
+}
 }
